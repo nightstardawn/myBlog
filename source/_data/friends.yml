@@ -1,0 +1,15 @@
+- group: 分组一 # 分组标题
+  description: 友情链接描述 # 分组描述
+  items:
+    - title: nightstardawn # 名称
+      avatar: https://s2.loli.net/2024/07/25/rv7nHeU8Qpx4d6b.jpg #头像
+      url: http://localhost:4000/ # 链接
+      screenshot: # 截图
+      keywords: # 关键词
+      description: # 描述
+    - title: # 名称
+      avatar: # 头像
+      url: # 链接
+      screenshot: # 截图
+      keywords: # 关键词
+      description: # 描述
