@@ -182,8 +182,8 @@ sidebar:
       shape: rectangle # circle, rectangle
       url: /about/
       title: nightstardawn
-      subtitle:
-      jinrishici: true # Poetry Today. You can set a string, and it will be displayed when loading fails.
+      subtitle: 我要漂亮姐姐教我魔法!!!代码也行
+      jinrishici: false # Poetry Today. You can set a string, and it will be displayed when loading fails.
       social:
         - icon: fa-solid fa-rss
           url: /atom.xml
@@ -199,7 +199,7 @@ sidebar:
       sticky: true
       header:
         icon: fa-solid fa-list
-        title: 本文目录
+        title: 神奇目录
       list_number: false
       min_depth: 2
       max_depth: 5
