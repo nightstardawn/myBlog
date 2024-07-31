@@ -57,4 +57,4 @@ CG 语法中提供了许多语义，这种特殊关键字用于修饰函数中�
 
 ## 三、更多语义
 
-HLSL 语义[汇总]()
+HLSL 语义[汇总](https://learn.microsoft.com/zh-cn/windows/win32/direct3dhlsl/dx-graphics-hlsl-semantics?redirectedfrom=MSDN)
