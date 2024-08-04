@@ -94,7 +94,7 @@ _Name("Display Name",Vector) =(num1,num2,num3,num4)
 - **Cube map texture 纹理** 纹理（立方体纹理，由于前后左右上下有联系的 2D 贴图拼成的立方体，比如天空盒和反射探针）
   `_Name("Display Name",Cube) ="defaulttexture"{}`
 - **3D 纹理**（一般由脚本创建，极少使用）
-  `_Name("Display Name",Cube) ="defaulttexture"{}`
+  `_Name("Display Name",3D) ="defaulttexture"{}`
 
   **注：**
 
