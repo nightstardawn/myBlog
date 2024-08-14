@@ -23,11 +23,11 @@ author:
 ### 2.作用
 
 他们是预定义的 shader 文件，里面包含了一些已经写好的 shader 相关逻辑
-作用和 cG 内置函数一样，可以提升我们的 shader 开发效率，可以直接使用其中的方法等内容来进行逻辑开发
+作用和 CG 内置函数一样，可以提升我们的 shader 开发效率，可以直接使用其中的方法等内容来进行逻辑开发
 
 ### 3.unity 中常用的内置文件有
 
-1. UnitycG.cginc (包含最常用的帮助函数、宏和结构体等)
+1. UnityCG.cginc (包含最常用的帮助函数、宏和结构体等)
 2. Lighting.cginc (包含各种内置光照模型，如果编写的是 surface shader(标准表面着色器)，会自动包含进来)
 3. UnityShaderVariables.cginc (编译 Unityshader 时，会**自动包含进来**。包含许多内置的全局变量)
 4. HLSLsupport.cginc (编译 Unityshader 时，会**自动包含进来**。声明了很多用于跨平台编译的宏和定义)
