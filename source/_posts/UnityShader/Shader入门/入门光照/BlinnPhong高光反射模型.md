@@ -6,7 +6,7 @@ tags:
   - 光照模型
   - BlinnPhong高光反射模型
 categories:
-  - [技术美术, UnityShader]
+  - [技术美术, UnityShader, 光照模型]
 author:
   - nightstardawn
 ---
