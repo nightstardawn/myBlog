@@ -1,5 +1,5 @@
 ---
-title: 获取全局变量和函数
+title: C#内容映射Lua中
 tags:
   - 程序语言
   - 热更新
@@ -163,4 +163,79 @@ call5(1010, 1, 1, "23", 4, 6, "5", true);
 //xLua提供的一种方式
 LuaFunction lF4 = LuaMgr.Instance.Global.Get<LuaFunction>("testFun4");
 lF4.Call(1010, 1, 1, "23", 4, 6, "5", true);
+
+```
+
+## 四、List 和 Dictionary 映射 table
+
+### 1.List
+
+```cs
+//同一类型的List
+//值拷贝（浅拷贝） 不会改变lua中的类型
+List<int> list = LuaMgr.Instance.Global.Get<List<int>>("testList1");
+for (int i = 0; i < list.Count; i++)
+{
+  Debug.Log("List1: " + list[i]);
+}
+Debug.Log("***********************************************");
+//不同类型的List
+//使用Object存储即可
+List<object> list2 = LuaMgr.Instance.Global.Get<List<object>>("testList2");
+for (int i = 0; i < list2.Count; i++)
+{
+  Debug.Log("List2: " + list2[i]);
+}
+```
+
+### 2.Dictionary
+
+```cs
+//加载同一类型的字典
+//值拷贝（浅拷贝） 不会改变lua中的类型
+Dictionary<string, int> Dic1 = LuaMgr.Instance.Global.Get<Dictionary<string, int>>("testDic");
+foreach (KeyValuePair<string, int> item in Dic1)
+{
+  Debug.Log("Dic1: " + item.Key + "_" + item.Value);
+}
+
+//加载不同类型的字典
+//使用Object存储即可
+Dictionary<object, object> Dic2 = LuaMgr.Instance.Global.Get<Dictionary<object, object>>("testDic2");
+foreach (KeyValuePair<object, object> item in Dic2)
+{
+  Debug.Log("Dic2: " + item.Key + "_" + item.Value);
+}
+```
+
+## 五、类映射到 table
+
+```cs
+public class CallLuaClass
+{
+    //声明的成员变量 要和Lua中的变量名一样 且要公共的
+    //自定义的变量 可以多 也可以少
+    //值拷贝（浅拷贝） 不会改变lua中的类型
+    public int testInt;
+    public bool testBool;
+    public float testFloat;
+    public string testString;
+    public UnityAction testFun;
+
+}
+public class Lesson7_CallClass : MonoBehaviour
+{
+    // Start is called before the first frame update
+    void Start()
+    {
+        LuaMgr.Instance.Init();
+        LuaMgr.Instance.DoLuaFile("Main");
+        CallLuaClass callLuaClass = LuaMgr.Instance.Global.Get<CallLuaClass>("testClass");
+        Debug.Log(callLuaClass.testInt);
+        Debug.Log(callLuaClass.testFloat);
+        Debug.Log(callLuaClass.testBool);
+        Debug.Log(callLuaClass.testString);
+        callLuaClass.testFun();
+    }
+}
 ```
