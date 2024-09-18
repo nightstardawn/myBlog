@@ -239,3 +239,61 @@ public class Lesson7_CallClass : MonoBehaviour
     }
 }
 ```
+
+## 六、接口映射到 table
+
+**注意：**
+接口中是不允许有成员变量
+所以我们用成员属性来接 lua 中的变量
+
+```cs
+//注意这里接口内部更改后 要重新生成代码
+//接口中的拷贝是浅拷贝！！！
+[CSharpCallLua]
+public interface ICallLuaInterface
+{
+    int testInt { get; set; }
+    bool testBool { get; set; }
+    float testFloat { get; set; }
+    string testString { get; set; }
+    UnityAction testFun { get; set; }
+}
+
+public class Lesson8_CallInterface : MonoBehaviour
+{
+    void Start()
+    {
+        LuaMgr.Instance.Init();
+        LuaMgr.Instance.DoLuaFile("Main");
+        ICallLuaInterface iCallLuaInterface = LuaMgr.Instance.Global.Get<ICallLuaInterface>("testInterface");
+        Debug.Log(iCallLuaInterface.testInt);
+        Debug.Log(iCallLuaInterface.testFloat);
+        Debug.Log(iCallLuaInterface.testBool);
+        Debug.Log(iCallLuaInterface.testString);
+        iCallLuaInterface.testFun();
+    }
+}
+```
+
+## 七、LuaTable 映射到 table
+
+```cs
+public class Lesson9_CallLuaTable : MonoBehaviour
+{
+    void Start()
+    {
+        LuaMgr.Instance.Init();
+        LuaMgr.Instance.DoLuaFile("Main");
+        //一般都不建议使用LuaTable和LuaFunction
+        //效率低 且是 浅拷贝
+        LuaTable luaTable = LuaMgr.Instance.Global.Get<LuaTable>("testLuaTable");
+        Debug.Log(luaTable.Get<int>("testInt"));
+        Debug.Log(luaTable.Get<int>("testFloat"));
+        Debug.Log(luaTable.Get<int>("testBool"));
+        Debug.Log(luaTable.Get<int>("testString"));
+        luaTable.Get<LuaFunction>("testFun").Call();
+        luaTable.Dispose();
+    }
+
+}
+```
