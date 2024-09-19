@@ -3,7 +3,7 @@ title: 面试题汇总CShapeDay13
 tags:
   - 面试题汇总
 categories:
-  - [面试题, C#]
+  - [面试题，C#]
 author:
   - nightstardawn
 ---
