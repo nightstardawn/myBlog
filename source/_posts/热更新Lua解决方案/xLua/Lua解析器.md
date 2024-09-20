@@ -3,7 +3,7 @@ title: Lua解析器
 tags:
   - 程序语言
   - 热更新
-  - AssetBundle
+  - xLua
 categories:
   - [热更新, AssetBundle]
 author:

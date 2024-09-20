@@ -3,7 +3,7 @@ title: C#内容映射Lua中
 tags:
   - 程序语言
   - 热更新
-  - AssetBundle
+  - xLua
 categories:
   - [热更新, AssetBundle]
 author:
