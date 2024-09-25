@@ -239,3 +239,121 @@ print(dic2:get_Item("123"))
 dic2:set_Item("123",nil)
 print(dic2:get_Item("123"))
 ```
+
+## 四、调用拓展方法
+
+- 注意：一定要加特性 [LuaCallCSharp]
+- 建议：Lua 中 要使用的类 都加上该特性 可以提升性能
+- 原因：如果不加该特性 除了拓展方法对应的类 其他类的使用 都不会报错
+  但是 lua 是通过反射的机制去调用的 C# 效率低
+
+CS 中
+
+```cs
+[LuaCallCSharp]
+public static class Tools
+{
+    public static void Move(this Lesson4 obj)
+    {
+        Debug.Log(obj.name + "移动");
+    }
+}
+public class Lesson4
+{
+    public string name = "tang";
+    public void Speak(string str)
+    {
+        Debug.Log(str);
+    }
+    public static void Eat()
+    {
+        Debug.Log("吃东西");
+    }
+}
+```
+
+Lua 中
+
+```lua
+Lesson4 = CS.Lesson4
+--使用静态方法
+Lesson4.Eat()
+--成员方法
+local obj = Lesson4()
+obj:Speak("hahhh")
+--拓展方法
+--使用方法和成员方法一致
+obj:Move()
+```
+
+## 五、调用参数为 ref 和 out 的函数
+
+```cs
+public class Lesson5
+{
+    public int RefFun(int a, ref int b, ref int c, int d)
+    {
+        b = a + d;
+        c = a - d;
+        return 100;
+    }
+    public int OutFun(int a, out int b, out int c, int d)
+    {
+        b = a;
+        c = d;
+        return 200;
+    }
+    public int RefOutFun(int a, out int b, ref int c)
+    {
+        b = a * 10;
+        c = a * 20;
+        return 300;
+    }
+}
+```
+
+### 1.ref
+
+ref 参数 会以多返回值的形式返回给 lua
+如果函数存在返回值 那第一个值就是返回值
+之后的值 就是 ref 的返回值 从左到右一一对应
+ref 参数传入一个默认值 作为占位
+以上面 RefFun 函数为例子：
+
+- a 函数默认返回值
+- b 第一个 ref
+- c 第二个 ref
+- d 最后一个参数
+
+```lua
+local a,b,c = obj:RefFun(1,0,0,1)
+print(a)
+print(b)
+print(c)
+```
+
+### 2.out
+
+out 参数 会以多返回值的形式返回给 lua
+如果函数存在返回值 那第一个值就是返回值
+之后的值 就是 out 的返回值 从左到右一一对应
+out 参数 不需要传参数占位置
+
+```lua
+local a,b,c = obj:OutFun(20,30)
+print(a)
+print(b)
+print(c)
+```
+
+### 3.ref 和 out 混合
+
+ref 和 out 混合的规则
+对应各个的规则即可
+
+```lua
+local a,b,c = obj:RefOutFun(20,1)
+print(a)
+print(b)
+print(c)
+```

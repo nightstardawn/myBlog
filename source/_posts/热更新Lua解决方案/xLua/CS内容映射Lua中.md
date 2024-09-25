@@ -248,7 +248,7 @@ public class Lesson7_CallClass : MonoBehaviour
 
 ```cs
 //注意这里接口内部更改后 要重新生成代码
-//接口中的拷贝是浅拷贝！！！
+//接口中的拷贝是深拷贝！！！
 [CSharpCallLua]
 public interface ICallLuaInterface
 {
@@ -285,7 +285,7 @@ public class Lesson9_CallLuaTable : MonoBehaviour
         LuaMgr.Instance.Init();
         LuaMgr.Instance.DoLuaFile("Main");
         //一般都不建议使用LuaTable和LuaFunction
-        //效率低 且是 浅拷贝
+        //效率低 且是 深拷贝
         LuaTable luaTable = LuaMgr.Instance.Global.Get<LuaTable>("testLuaTable");
         Debug.Log(luaTable.Get<int>("testInt"));
         Debug.Log(luaTable.Get<int>("testFloat"));
