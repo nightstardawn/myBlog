@@ -357,3 +357,204 @@ print(a)
 print(b)
 print(c)
 ```
+
+## 六、函数重载
+
+```cs
+public class Lesson6
+{
+    public int Calc()
+    {
+        return 100;
+    }
+    public int Calc(int a, int b)
+    {
+        return a + b;
+    }
+    public int Calc(int a)
+    {
+        return a;
+    }
+    public float Calc(float a)
+    {
+        return a;
+    }
+
+}
+```
+
+```lua
+local obj = CS.Lesson6()
+print(obj:Calc())
+print(obj:Calc(15,1))
+--lua自己本身不支持重载
+--但是lua支持调用C#中的重载函数
+
+print(obj:Calc(10))
+print(obj:Calc(10.2))
+
+--lua虽然支持调用用c#重载函数
+--但是因为 Lua中的数值类型只有number
+--在C#中如果出现多精度的重载 可能会有出现问题
+--解决方法：
+--xlua提供了解决方案 ————反射Type
+--这种方法只做了解 尽量别用 效率低
+
+--得到函数的指定信息
+local m1 = typeof(CS.Lesson6):GetMethod("Calc",{typeof(CS.System.Int32)})
+local m2 = typeof(CS.Lesson6):GetMethod("Calc",{typeof(CS.System.Single)})
+
+--通过xlua提供的方法 把他转成lua函数来使用
+--一般我们转一次之后 反复使用
+local f1 = xlua.tofunction(m1)
+local f2 = xlua.tofunction(m2)
+--成员方法：第一个参数 为 调用对象
+--静态方法：不用传对象
+print(f1(obj,10))
+print(f2(obj,10.2))
+
+```
+
+## 七、委托和事件
+
+```cs
+public class Lesson7
+{
+    public UnityAction del;
+    public event UnityAction eventAction;
+
+    public void DoEvent()
+    {
+        eventAction?.Invoke();
+    }
+    public void ClearEvent()
+    {
+        eventAction = null;
+    }
+}
+```
+
+```lua
+
+local obj = CS.Lesson7()
+
+--委托是用来装函数的
+--使用C#中的委托 就是用来装lua中的函数的
+local fun = function ()
+    print("Lua函数fun")
+end
+
+--lua中没有符合函数 不能+=
+--注意：如果第一次往委托中加函数 因为是nil 不能+
+--所以第一次 要先=
+obj.del = fun
+obj.del = obj.del + fun
+obj.del = obj.del - fun
+obj.del()
+--清空委托
+obj.del = nil
+-- 事件+—函数 和 委托完全不一样
+--要将添加事件当作成员方法来使用
+obj:eventAction("+",fun)
+obj:eventAction("-",fun)
+obj:DoEvent()
+--事件不能直接设置为空
+--只能在C#中通过成员方法 包裹一层 置空方法
+obj:ClearEvent()
+```
+
+## 八、特殊问题
+
+### 1.二维数组
+
+```cs
+public class Lesson8
+{
+    public int[,] array = new int[,] { { 1, 2, 3 }, { 4, 5, 6 } };
+}
+```
+
+```lua
+local obj = CS.Lesson8()
+
+--获取长度
+print("行："..obj.array:GetLength(0))
+print("列："..obj.array:GetLength(1))
+--获取元素
+--注意
+--不能通过obj.array[0，0] obj.array[0][0]的方式访问
+--通过F12访问数组 可知 数组内有GetValue和SetValue的方法
+print(obj.array:GetValue(0,0))
+print(obj.array:GetValue(1,0))
+print("************************")
+for i = 0, obj.array:GetLength(0) - 1 do
+    for j = 0, obj.array:GetLength(1) - 1 do
+       print(obj.array:GetValue(i,j))
+    end
+end
+```
+
+### 2.null 和 nil 的比较
+
+```lua
+--场景：
+--往场景对象上添加脚本 如果存在就不添加 不存在再添加
+
+GameObject = CS.UnityEngine.GameObject
+Rigidbody = CS.UnityEngine.Rigidbody
+
+local obj = GameObject("测试脚本")
+--获取身上的刚体组件 如果没有就加 有就不管
+local rig = obj:GetComponent(typeof(Rigidbody))
+--注意在lua中nil和null无法 == 比较
+-- 所以我们通过Equals方法进行比较
+--但对象本来就是nil，就会出问题
+--综上：一般我们会自己写一个全局方法来判空
+function IsNull(obj)
+    if obj==nil or obj:Equals(nil) then
+        return true
+    end
+    return false
+end
+if rig:Equals(nil) then
+    rig = obj:AddComponent(typeof(Rigidbody))
+end
+if IsNull(rig) then
+    rig = obj:AddComponent(typeof(Rigidbody))
+end
+```
+
+## 九、协程函数
+
+```lua
+--xlua 提供的工具表
+--一定是要require调用之后 才能使用
+util = require("util")
+--C#中协程启动 都是继承了Mono的类 通过里面的启动函数StartCoroutine
+
+GameObject = CS.UnityEngine.GameObject
+WaitForSeconds =CS.UnityEngine.WaitForSeconds
+--在场景中新建一个空物体 然后挂载一个脚本去 继承mono使用它来开启协程
+local obj = GameObject("Coroutine")
+local mono = obj:AddComponent(typeof(CS.LuaCallCS))
+
+fun = function ()
+    local a = 1
+    while true do
+        --lua中不能直接使用 c#中的yield reture
+        --就使用lua中的协程返回
+        coroutine.yield(WaitForSeconds(1))
+        print(a)
+        a = a + 1
+        if a>10 then
+            mono:StopCoroutine(b)
+        end
+    end
+end
+--注意：
+--我们不能将lua函数 传入到C#中的开启协程函数中
+
+
+--使用C#中的开启协程函数，必须先调用xlua中的util.cs_generator
+b = mono:StartCoroutine(util.cs_generator(fun))
+```
