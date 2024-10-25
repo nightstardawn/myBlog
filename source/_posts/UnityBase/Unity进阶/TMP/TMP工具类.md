@@ -80,3 +80,55 @@ author:
 TMP_TextEventHandler tmpHandler;
 tmpHandler.onLinkSelection.AddListener(对应函数);
 ```
+
+## 二、TMP_TextUtilities 类
+
+### 1.作用
+
+包含多个常用方法，主要用于获取指定位置的文本信息
+我们主要在点击文本时，利用该类来获取点击到的具体内容
+
+### 2.常用 api
+
+**注意：**
+下面的方法返回的都是索引值，如果没有获取到信息返回-1
+利用获取到的索引可以在 TMP 文本中的 textInfo 属性中的
+
+- linkInfo
+- wordInfo
+- characterInfo
+- lineInfo
+  来获取信息
+
+1. 获取指定位置文本中的具体内容
+   - 获取链接索引 int FindIntersctingLink(TMP_Text text,Vecor3 position,Camera camera)
+   - 获取单词索引 int FindIntersctingWord(TMP_Text text,Vecor3 position,Camera camera)
+   - 获取字符索引 int FindIntersctingCharacter(TMP_Text text,Vecor3 position,Camera camera)
+   - 获取行索引 int FindIntersctingLine(TMP_Text text,Vecor3 position,Camera camera)
+2. 获取离给定位置最新文本中的具体内容
+   - 获取链接索引 int FindNearestLink(TMP_Text text,Vecor3 position,Camera camera)
+   - 获取单词索引 int FindNearestWord(TMP_Text text,Vecor3 position,Camera camera)
+   - 获取字符索引 int FindNearestCharacter(TMP_Text text,Vecor3 position,Camera camera)
+   - 获取行索引 int FindNearestLine(TMP_Text text,Vecor3 position,Camera camera)
+3. 更多 api 可以查看官网
+
+```cs
+//使用示例
+
+//第一步  继承对应的UI控制接口 如IPointerClickHandler
+//第二步  实现接口的方法
+//第三步  在方法中使用TMP_TextUtilities.方法
+public void OnPointerClick()
+{
+  int index = TMP_TextUtilities.FindIntersctingLink(tmpUItext,eventData.position,null);
+  //如果不为-1 就说明点到了一个超链接信息
+  if(index != -1)
+  {
+    //得到超链接的文本信息
+    print(tmpUItext.textInfo.linkInfo[linkIndex].GetLinkText());
+    //得到超链接的信息
+    print(tmpUItext.textInfo.linkInfo[linkIndex].GetLinkID());
+  }
+}
+
+```
