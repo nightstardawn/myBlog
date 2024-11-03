@@ -93,56 +93,56 @@ SDF 是有符号距离场(signed Distance Field)的缩写
 
 ![ 2024-10-24 225706.png](https://s2.loli.net/2024/10/24/Gq48Od1HFVIDXbT.png)
 
-- Type
+- **Type**
   - Outer Belevl 外斜面
     让字体产生带有倾斜斜面的突起效果
     相当于中间凸出来
   - Inner Belebl 内斜面
     轮廓突起的文本
     相当于向中间凹进去
-- Amount 陡峭程度
-- Offset 偏移位置
-- Width 斜面大小
-- Roundness 平滑程度
-- Clamp 限制斜面的最大高度
+- **Amount** 陡峭程度
+- **Offset** 偏移位置
+- **Width** 斜面大小
+- **Roundness** 平滑程度
+- **Clamp** 限制斜面的最大高度
 
 #### 2.）本地照明设置
 
 ![ 2024-10-24 225734.png](https://s2.loli.net/2024/10/24/QzqZbP4RY3nxWmp.png)
 
-- Light Angle 光照角度 模拟局部光的角度
-- Specular Color 镜面反射的颜色
-- Specular Color 镜面反射的强度
-- Reflectivity Power 反射强度，值越大越能反应周围环境的颜色
-- Diffuse Shadow 漫反射阴影，调整整体的阴影等级，值越高，阴影越强
-- Amblent Shadow 环境阴影，调整环境光照水平
+- **Light Angle** 光照角度 模拟局部光的角度
+- **Specular Color** 镜面反射的颜色
+- **Specular Color** 镜面反射的强度
+- **Reflectivity Power** 反射强度，值越大越能反应周围环境的颜色
+- **Diffuse Shadow** 漫反射阴影，调整整体的阴影等级，值越高，阴影越强
+- **Amblent Shadow** 环境阴影，调整环境光照水平
 
 #### 3.）凹凸贴图的设置
 
 ![ 2024-10-24 231025.png](https://s2.loli.net/2024/10/24/V7ZalYewisofjgI.png)
 
-- Texture 凹凸贴图
-- Face 凹凸贴图的程度
-- Outline 凹凸贴图对文本轮廓的影响程度
+- **Texture** 凹凸贴图
+- **Face** 凹凸贴图的程度
+- **Outline** 凹凸贴图对文本轮廓的影响程度
 
 #### 4.）环境设置
 
 ![ 2024-10-24 231030.png](https://s2.loli.net/2024/10/24/L9Tj32cxFgqJWzr.png)
 
-- Face Color 立方体贴图对文本的颜色影响，会和文本进行颜色叠加
-- Outline Color 立方体贴图对文本的轮廓颜色的影响，会和轮廓进行颜色叠加
-- Texture 环境的立方体纹理贴图
-- Rotation 旋转环境贴图
+- **Face Color** 立方体贴图对文本的颜色影响，会和文本进行颜色叠加
+- **Outline Color** 立方体贴图对文本的轮廓颜色的影响，会和轮廓进行颜色叠加
+- **Texture** 环境的立方体纹理贴图
+- **Rotation** 旋转环境贴图
 
 ### 4.发光
 
 ![ 2024-10-24 231941.png](https://s2.loli.net/2024/10/24/29Cf7s83loBgwWq.png)
 
-- Color 发光颜色
-- Offset 发光效果中心偏移的位置
-- Inner 发光效果向内扩散效果
-- Outer 发光效果向外扩散效果
-- Power 发光强度
+- **Color** 发光颜色
+- **Offset** 发光效果中心偏移的位置
+- **Inner** 发光效果向内扩散效果
+- **Outer** 发光效果向外扩散效果
+- **Power** 发光强度
 
 ### 5. 调试设置
 
