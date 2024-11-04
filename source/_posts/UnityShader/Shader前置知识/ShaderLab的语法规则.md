@@ -6,7 +6,7 @@ tags:
   - SubShader
   - 备用 Shader
 categories:
-  - [技术美术, UnityShader]
+  - [技术美术, UnityShader，基础知识]
 author:
   - nightstardawn
 ---

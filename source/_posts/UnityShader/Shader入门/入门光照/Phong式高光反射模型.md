@@ -6,7 +6,7 @@ tags:
   - 光照模型
   - 高光反射光照模型
 categories:
-  - [技术美术, UnityShader, 光照模型]
+  - [技术美术, UnityShader，光照模型]
 author:
   - nightstardawn
 ---

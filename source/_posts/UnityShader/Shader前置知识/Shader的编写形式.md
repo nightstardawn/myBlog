@@ -4,7 +4,7 @@ tags:
   - Shader
   - Shader的编写形式
 categories:
-  - [技术美术, UnityShader]
+  - [技术美术, UnityShader，基础知识]
 author:
   - nightstardawn
 ---

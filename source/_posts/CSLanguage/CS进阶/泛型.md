@@ -4,7 +4,7 @@ tags:
   - 程序语言
   - C#语言
 categories:
-  - [程序语言, C#语言, 核心]
+  - [程序语言, C#语言，核心]
 author:
   - nightstardawn
 ---

@@ -5,7 +5,7 @@ tags:
   - Unity进阶
   - TextMeshPro
 categories:
-  - [Unity客户端, Unity进阶，TextMeshPro]
+  - [Unity客户端, TextMeshPro]
 author:
   - nightstardawn
 ---

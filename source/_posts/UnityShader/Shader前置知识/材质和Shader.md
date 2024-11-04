@@ -3,7 +3,7 @@ title: 材质和Shader
 tags:
   - Shader
 categories:
-  - [技术美术, UnityShader]
+  - [技术美术, UnityShader，基础知识]
 author:
   - nightstardawn
 ---
