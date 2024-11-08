@@ -110,12 +110,124 @@ i = EditorGUILayout.IntField("整数输入框",i);
 ```
 ![ 2024-11-04 224055.png](https://s2.loli.net/2024/11/04/DhyJAnQpbq8GCI5.png)
 
+## 五、折叠和折叠组
+**注意：**
+折叠和折叠组的区别只是表现上的不同
+```csharp
+//折叠控件
+//参数一：折叠状态
+//参数二：折叠标题
+//参数三：是否允许点击文字触发
+isHide = EditorGUILayout.Foldout(isHide, "折叠控件",true);
+if (isHide)
+{
+    //枚举选择控件
+    type = (E_TestEnum)EditorGUILayout.EnumPopup("枚举选择",type);
+    //多选枚举
+    type2 = (E_TestEnum)EditorGUILayout.EnumFlagsField("多选枚举", type2);
+}
+//折叠组控件
+//和折叠空间仅有表现上的不同
+isHideGroup = EditorGUILayout.BeginFoldoutHeaderGroup(isHideGroup, "折叠组控件");
+if (isHideGroup)
+{
+    //枚举选择控件
+    type = (E_TestEnum)EditorGUILayout.EnumPopup("枚举选择",type);
+    //多选枚举
+    type2 = (E_TestEnum)EditorGUILayout.EnumFlagsField("多选枚举", type2);
+}
+EditorGUILayout.EndFoldoutHeaderGroup();
+```
+![ 2024-11-08 204935.png](https://s2.loli.net/2024/11/08/hBkyZEL52M8KYDP.png)
 
 
+## 六、开光和开关组
 
+```csharp
+//开关控件
+isTog = EditorGUILayout.Toggle("开关控件", isTog);
+isTogLeft = EditorGUILayout.ToggleLeft("左侧开关控件", isTogLeft);
+//开关组控件
+isTogGroup = EditorGUILayout.BeginToggleGroup("开关组控件", isTogGroup);
+isTog = EditorGUILayout.Toggle("开关控件", isTog);
+isTogLeft = EditorGUILayout.ToggleLeft("左侧开关控件", isTogLeft);
+EditorGUILayout.EndToggleGroup();
+```
 
+![ 2024-11-08 204945.png](https://s2.loli.net/2024/11/08/zbtQfReE6OFcdoY.png)
 
+## 七、滑动条、双块滑动条控件
 
+### 1.滑动条
+```csharp
+//滑动条
+//浮点数滑动条
+fslider = EditorGUILayout.Slider("滑动条", fslider, 0, 100);
+//整数滑动条
+islider = EditorGUILayout.IntSlider("整数滑动条", islider, 0, 100);
+```
+![ 2024-11-08 211009.png](https://s2.loli.net/2024/11/08/Nb9GvpW1lF5dJEi.png)
+### 2. 双块滑动条
+```csharp
+//双块滑动条
+EditorGUILayout.MinMaxSlider("双块滑动条", ref leftValue, ref rightValue, 0, 100);
+EditorGUILayout.LabelField("左值：" + leftValue.ToString());
+EditorGUILayout.LabelField("右值：" + rightValue.ToString());
+```
+![ 2024-11-08 211013.png](https://s2.loli.net/2024/11/08/uZCPjtbmiXWJH28.png)
+
+## 八、帮助框、间隔控件
+### 1.帮助框
+```csharp
+EditorGUILayout.HelpBox("一般内容", MessageType.None);
+EditorGUILayout.HelpBox("感叹号内容", MessageType.Info);
+EditorGUILayout.HelpBox("警告符提示", MessageType.Warning);
+EditorGUILayout.HelpBox("错误符提示", MessageType.Error);
+```
+![ 2024-11-08 211702.png](https://s2.loli.net/2024/11/08/pxOEPWyHw1s4RGo.png)
+### 2.间隔控件
+```csharp
+EditorGUILayout.LabelField("间隔控件1");
+EditorGUILayout.Space(50);
+EditorGUILayout.LabelField("间隔控件2");
+EditorGUILayout.Space(100);
+EditorGUILayout.LabelField("间隔控件3");
+```
+![ 2024-11-08 211920.png](https://s2.loli.net/2024/11/08/GfQkEDIn31xiwHe.png)
+
+## 九、动画曲线控件、布局api
+```csharp
+//---动画曲线控件---
+ curve = EditorGUILayout.CurveField("动画曲线", curve);
+```
+![ 2024-11-08 213827.png](https://s2.loli.net/2024/11/08/AuZVqaQjRiYIxEL.png)
+```csharp
+
+//---布局api---
+//---------
+EditorGUILayout.BeginHorizontal();//开始水平布局
+//一堆控件
+EditorGUILayout.LabelField("控件1");
+EditorGUILayout.LabelField("控件2");
+EditorGUILayout.LabelField("控件3");
+EditorGUILayout.EndHorizontal();//结束水平布局
+//----------
+
+//----------
+EditorGUILayout.BeginVertical();//开始垂直布局
+//一堆控件
+EditorGUILayout.LabelField("控件1");
+EditorGUILayout.LabelField("控件2");
+EditorGUILayout.LabelField("控件3");
+EditorGUILayout.EndVertical(); //结束垂直布局
+//---------- 
+vecPos =EditorGUILayout.BeginScrollView(vecPos);//开始滚动视图
+//一堆控件
+EditorGUILayout.EndScrollView();//结束布局
+//----------
+```
+![ 2024-11-08 213818.png](https://s2.loli.net/2024/11/08/ILipOabd8vEhto9.png)
+![ 2024-11-08 213833.png](https://s2.loli.net/2024/11/08/HpkodTNXZBGvAwY.png)
 
 
 
