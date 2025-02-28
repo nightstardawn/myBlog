@@ -150,7 +150,7 @@ Shader "Unlit/BlinnSpecular"
 
 1. 属性声明（材质高光反射的颜色，光泽度）
 2. 渲染标签 Tags 的设置 将 LightMode 光照模式 设置为 ForwardBase 向前渲染（该模式通常用于不透明物体的基本渲染）
-3. 引用内置文件 "UnityCG.cginc" "UnityCG.cginc"
+3. 引用内置文件 "UnityCG.cginc" "Lighting.cginc"
 4. 结构体声明
 5. 基本逻辑的实现
 
