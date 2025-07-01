@@ -46,15 +46,17 @@ author:
 - yield return new WaitForFixedUpdate();
 - yeild return new WaitForEndFrame();
 - yeild break;
-  **答案：**
-  |代码|含义|
-  |---|---|
-  |yield return 数字;|下一帧执行|
-  |yield return null;|下一帧执行|
-  |yield return new WaitForSeconds(数字);|等待指定秒数后执行|
-  |yield return new WaitForFixedUpdate();|等待下一个固定物理帧更新时执行|
-  |yeild return new WaitForEndFrame();|等待摄像机和 GUI 渲染完成后执行|
-  |yeild break;|跳出协程|
+
+**答案：**
+
+|代码|含义|
+|---|---|
+|yield return 数字;|下一帧执行|
+|yield return null;|下一帧执行|
+|yield return new WaitForSeconds(数字);|等待指定秒数后执行|
+|yield return new WaitForFixedUpdate();|等待下一个固定物理帧更新时执行|
+|yeild return new WaitForEndFrame();|等待摄像机和 GUI 渲染完成后执行|
+|yeild break;|跳出协程|
 
 ## 5.Unity 协同程序进行异步加载时，底层是否使用多线程？
 

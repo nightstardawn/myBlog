@@ -20,6 +20,7 @@ author:
 ## 2.下面的小球是否被渲染，是否产生 DrawCall？
 
 ![图2](https://s2.loli.net/2024/08/16/mDei6SZuL8TbyoR.png)
+
 **答案：**
 不会被渲染 ，不会产生 DrawCall
 Unity 本身有摄像机视锥休剔除，也就是不会显示完全位于视锥体之外的游戏对象那么小球就不会进行渲染 ，也不会提交数据给 GPU，也就不会产生 DrawCall
@@ -50,6 +51,8 @@ C#的反射
    - 等选项
      然后只需要 Build and Run 既可以利用 Unity 的 Profler 性能剖析器窗口排查性能问题并且还可以进行断点调试
 
-2. 如果只是获取一些打印调试信息可以利用 Unity2019.4 及其以上版本提供的 Android Logcat 具获取信息 Unity2019.4 以下的版本，可以使用 Android 的 ADB(安卓调试桥)工具
+2. 如果只是获取一些打印调试信息
+   - Unity2019.4 及其以上版本提供的 Android Logcat 具获取信息 
+   - Unity2019.4 以下的版本，可以使用 Android 的 ADB(安卓调试桥)工具
 3. 如果需要获取设备输入信息
    可以利用 Unity Remote 来测试移动设备的输入相关逻钼
